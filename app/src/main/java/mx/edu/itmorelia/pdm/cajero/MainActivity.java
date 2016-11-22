@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
-            // Añadir carácteristicas
+           setupDrawerContent(navigationView);//escuchar item seleccionado
         }
 
         drawerTitle = getResources().getString(R.string.home_item);
         if (savedInstanceState == null) {
-            // Seleccionar item
+            selectItem(drawerTitle);//crear fragmento dinamicamente dependiendo del item seleccionado
         }
 
     }
@@ -53,6 +53,19 @@ public class MainActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
+    }
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                //Marcar item presionado
+                menuItem.setChecked(true);
+                //Crear nuevo fragmento
+                String title = menuItem.getTitle().toString();
+                selectItem(title);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -74,4 +87,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+   private void selectItem(String title) {
+        //Enviar como argumento del fragmento
+        Bundle args = new Bundle();
+        args.putString(PlaceholderFragment.ARG_SECTION_TITLE, title);
+
+        Fragment fragment = PlaceholderFragment.newInstance(title);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_content, fragment)
+                .commit();
+        drawerLayout.closeDrawers(); // Cerrar drawer
+
+        setTitle(title); // Setear título actual
+
+    }
+
 }
+

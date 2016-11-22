@@ -54,7 +54,18 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 inputText = input.getText().toString();
-                Toast.makeText(getApplicationContext(), inputText, Toast.LENGTH_SHORT).show();
+                if(inputText.equals("1234")){
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
+                }else{
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(getApplicationContext(), InicioActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Codigo Incorrecto", Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
                 //scanner.resumeCameraPreview(result);
             }
         });

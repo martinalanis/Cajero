@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
@@ -8,21 +7,21 @@
             android:icon="@drawable/ic_home"
             android:title="@string/home_item" />
         <item
-            android:id="@+id/nav_productos"
-            android:icon="@drawable/ic_store"
-            android:title="@string/productos_item" />
+            android:id="@+id/nav_retiro"
+            android:icon="@drawable/ic_reply"
+            android:title="@string/retiro_item" />
         <item
-            android:id="@+id/nav_carrito"
-            android:icon="@drawable/ic_shopping_cart"
-            android:title="@string/compras_item" />
+            android:id="@+id/nav_deposito"
+            android:icon="@drawable/ic_share"
+            android:title="@string/deposito_item" />
         <item
-            android:id="@+id/nav_ordenes"
-            android:icon="@drawable/ic_truck"
-            android:title="@string/ordenes_item" />
+            android:id="@+id/nav_transferencia"
+            android:icon="@drawable/ic_swap_horizontal"
+            android:title="@string/transferencia_item" />
         <item
-            android:id="@+id/nav_facturas"
-            android:icon="@drawable/ic_file_document"
-            android:title="@string/facturas_item" />
+            android:id="@+id/nav_cambiarpin"
+            android:icon="@drawable/ic_key_variant"
+            android:title="@string/cambiarpin_item" />
 
         <!-- Sección de configuración -->
         <item
@@ -36,5 +35,4 @@
             </menu>
         </item>
     </group>
-
 </menu>

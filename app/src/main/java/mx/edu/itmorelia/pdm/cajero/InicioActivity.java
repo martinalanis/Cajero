@@ -1,10 +1,15 @@
 package mx.edu.itmorelia.pdm.cajero;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +23,7 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
 
     private ZXingScannerView scanner;
     private String inputText;
+    public static final int NOTIFICACION_ID=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
     }
 
     @Override
-    public void handleResult(final Result result){
+    public void handleResult(Result result){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Bienvenido");
@@ -59,11 +65,9 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
+                    startNotification("Bienvenido "+ "Martin", "Haz iniciado sesión", "Sesión nueva");
                 }else{
-                    Bundle bundle = new Bundle();
-                    Intent intent = new Intent(getApplicationContext(), InicioActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(getApplicationContext(), "Codigo Incorrecto", Toast.LENGTH_SHORT).show();
+                    scanner.stopCamera();
                 }
                 //Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
                 //scanner.resumeCameraPreview(result);
@@ -84,7 +88,25 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
         //scanner.resumeCameraPreview(this);
     }
 
+    public void startNotification(String title, String text, String subtext){
+        //Construccion de la accion del intent implicito
+        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("http://martinalanis.com"));
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,0);
 
+        //Construccion de la notificacion;
+        NotificationCompat.Builder builder= new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_check_circle_outline);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_check_circle_outline));
+        builder.setContentTitle(title);
+        builder.setContentText(text);
+        builder.setSubText(subtext);
+
+        //Enviar la notificacion
+        NotificationManager notificationManager= (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICACION_ID,builder.build());
+    }
 
 
 }

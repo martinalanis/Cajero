@@ -10,31 +10,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mx.edu.itmorelia.pdm.cajero.loginActivity">
 
-    <EditText
-        android:background="#FFFFFF"
-        android:padding="10dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="12"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:id="@+id/login_cuenta"
-        android:hint="Numero de Cuenta" />
-
-    <EditText
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:ems="12"
+        android:id="@+id/login_cuentacontainer">
+
+        <EditText
+            android:hint="Cuenta"
+            android:ems="10"
+            android:id="@+id/login_cuenta"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/login_pin"
-        android:layout_below="@+id/login_cuenta"
-        android:hint="PIN"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/login_pincontainer"
+        android:layout_below="@+id/login_cuentacontainer">
+
+        <EditText
+            android:hint="PIN"
+            android:ems="10"
+            android:id="@+id/login_pin"
+            android:inputType="numberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:text="Ingresar"
@@ -45,7 +57,7 @@
         android:background="@color/accentColor"
         android:onClick="login"
         android:textColor="#FFFFFF"
-        android:layout_below="@id/login_pin"
+        android:layout_below="@id/login_pincontainer"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"/>

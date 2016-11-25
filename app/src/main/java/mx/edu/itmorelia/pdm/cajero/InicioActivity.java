@@ -38,6 +38,13 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
         scanner.startCamera();
     }
 
+    public void login_manual (View v){
+        Bundle b = new Bundle();
+        Intent intent = new Intent(this, loginActivity.class);
+        startActivity(intent);
+        //Toast.makeText(getApplicationContext(), "Ingrese sus datos", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -61,7 +68,6 @@ public class InicioActivity extends AppCompatActivity implements ZXingScannerVie
             public void onClick(DialogInterface dialog, int which) {
                 inputText = input.getText().toString();
                 if(inputText.equals("1234")){
-                    Bundle bundle = new Bundle();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_SHORT).show();

@@ -24,19 +24,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-        android:text="Presione el botón para escanear su ID"
+        android:text="Seleccione una opción para iniciar sesión"
+        android:textAlignment="center"
         android:layout_below="@+id/text_bienvenido"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0074D9"
         android:textColor="#FFF"
         android:padding="20dp"
-        android:layout_centerInParent="true"
-        android:text="INGRESAR"
-        android:onClick="scan"/>
+        android:text="Escanear"
+        android:onClick="scan"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"/>
+
+    <Button
+        android:text="Ingresar Manual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:padding="20dp"
+        android:background="@color/window_background"
+        android:onClick="login_manual"
+        android:textColor="#FF4000"
+        android:layout_below="@id/btn_scan"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"/>
 
 </RelativeLayout>

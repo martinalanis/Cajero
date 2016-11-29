@@ -1,5 +1,7 @@
 package mx.edu.itmorelia.pdm.cajero;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     /**
      * Instancia del drawer
      */
     private DrawerLayout drawerLayout;
-
+    private SharedPreferences pref;
     /**
      * Titulo inicial del drawer
      */
@@ -89,18 +92,30 @@ public class MainActivity extends AppCompatActivity {
 
    private void selectItem(String title) {
         //Enviar como argumento del fragmento
-        Bundle args = new Bundle();
-        args.putString(PlaceholderFragment.ARG_SECTION_TITLE, title);
+        if(title.equalsIgnoreCase("Cerrar Sesión")){
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean(Constants.IS_LOGGED_IN, false);
+            editor.putString(Constants.EMAIL, "");
+            editor.putString(Constants.NOMBRE, "");
+            editor.putString(Constants.ID, "");
+            editor.apply();
+            Intent intent = new Intent(getApplicationContext(), InicioActivity.class);
+            finish();
+            startActivity(intent);
+        }else{
+            Bundle args = new Bundle();
+            args.putString(PlaceholderFragment.ARG_SECTION_TITLE, title);
 
-        Fragment fragment = PlaceholderFragment.newInstance(title);
-        fragment.setArguments(args);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_content, fragment)
-                .commit();
-        drawerLayout.closeDrawers(); // Cerrar drawer
+            Fragment fragment = PlaceholderFragment.newInstance(title);
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_content, fragment)
+                    .commit();
+            drawerLayout.closeDrawers(); // Cerrar drawer
 
-        setTitle(title); // Setear título actual
+            setTitle(title); // Setear título actual
+        }
 
     }
 

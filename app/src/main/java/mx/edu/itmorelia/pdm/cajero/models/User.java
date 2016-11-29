@@ -10,6 +10,7 @@ public class User {
     private String materno;
     private String cuenta;
     private String id;
+    private String pin;
 
 
     public String getNombre() {
@@ -50,5 +51,13 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 }
